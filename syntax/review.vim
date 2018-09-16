@@ -10,12 +10,12 @@ endif
 
 syn case match
 
-syn match reviewHeading
+syn match reviewHeading contains=reviewInlineCommand,reviewInlineStyleCommand
       \ "^=\+\%(\s\+\|{\|\[\).*"
 
 syn region reviewInlineCommand oneline
       \ start="@<\w\+>{" end="}"
-syn region reviewInlineStyleCommand oneline
+syn region reviewInlineStyleCommand transparent oneline
       \ matchgroup=reviewInlineCommand
       \ start="@<\%\(kw\|bou\|ami\|u\|b\|i\|strong\|em\|tt\|tti\|ttb\|code\|tcy\)>{"
       \ end="}"
