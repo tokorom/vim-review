@@ -41,8 +41,9 @@ syn match reviewPreProcCommand
       \ "^#@\%\(require\|provide\)\s\+.*"
 syn region reviewPreProcBlockCommand
       \ start="^#@\%\(mapfile\|maprange\|mapoutput\)(.*).*" end="^#@end\s*$"
-syn match reviewWarning
-      \ "^#@warn([^(]*).*"
+
+syn region reviewWarning oneline
+      \ matchgroup=reviewPreProcCommand start="^#@warn(" end=").*$"
 
 " ----------
 
@@ -59,7 +60,7 @@ hi def link reviewCommentBlock Comment
 hi def link reviewCommentInline Comment
 hi def link reviewPreProcCommand PreProc
 hi def link reviewPreProcBlockCommand PreProc
-hi def link reviewWarning PreProc
+hi def link reviewWarning Underlined
 
 " ----------
 
