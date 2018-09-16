@@ -20,7 +20,7 @@ syn region reviewInlineStyleCommand transparent oneline
       \ start="@<\%\(kw\|bou\|ami\|u\|b\|i\|strong\|em\|tt\|tti\|ttb\|code\|tcy\)>{"
       \ end="}"
 
-syn region reviewBlockCommand
+syn region reviewBlockCommand transparent
       \ matchgroup=reviewBlockDeclaration start="^//\w\+\[\?.*{\s*$" end="^//}\s*$"
 
 syn match reviewBlockCommandWithoutContent
@@ -28,11 +28,11 @@ syn match reviewBlockCommandWithoutContent
 syn match reviewControlCommand
       \ "^//\%\(noindent\|blankline\|linebreak\|pagebreak\)\s*$"
 
-syn region reviewItemize oneline contains=reviewInlineCommand,reviewInlineStyleCommand
+syn region reviewItemize transparent oneline
       \ matchgroup=reviewItemizePrefix start="^\s\+\*\+\s\+" end="$"
-syn region reviewOrderedItemize oneline contains=reviewInlineCommand,reviewInlineStyleCommand
+syn region reviewOrderedItemize transparent oneline
       \ matchgroup=reviewItemizePrefix start="^\s\+[0-9]\+\.\s\+" end="$"
-syn region reviewDefinitionList oneline contains=reviewInlineCommand,reviewInlineStyleCommand
+syn region reviewDefinitionList transparent oneline
       \ matchgroup=reviewItemizePrefix start="^\s\+\:\s\+" end="$"
 
 syn match reviewComment contains=reviewTodo
@@ -58,15 +58,10 @@ syn case match
 
 hi def link reviewHeading Conditional
 hi def link reviewInlineCommand Function
-hi def link reviewInlineStyleCommand Normal
-hi def link reviewBlockCommand Normal
 hi def link reviewBlockDeclaration Identifier
 hi def link reviewBlockCommandWithoutContent Identifier
 hi def link reviewControlCommand Identifier
 hi def link reviewItemizePrefix Special
-hi def link reviewItemize Normal
-hi def link reviewOrderedItemize Normal
-hi def link reviewDefinitionList Normal
 hi def link reviewComment Comment
 hi def link reviewCommentBlock Comment
 hi def link reviewCommentInline Comment
