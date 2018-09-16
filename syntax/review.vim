@@ -57,7 +57,7 @@ syn case match
 " ----------
 
 hi def link reviewHeading Conditional
-hi def link reviewInlineCommand Identifier
+hi def link reviewInlineCommand Function
 hi def link reviewInlineStyleCommand Normal
 hi def link reviewBlockCommand Normal
 hi def link reviewBlockDeclaration Identifier
