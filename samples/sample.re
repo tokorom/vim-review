@@ -4,6 +4,24 @@
 
  * @<href>{https://github.com/kmuto/review/blob/v2-stable/doc/format.md}
 
+= Sample
+
+Hello, @<kw>{Re:VIEW} :)
+
+//list[hello][Hello, World][swift]{
+class Hello {
+  func say(_ message: String) {
+    print(message)
+  }
+}
+//}
+
+Hello, footnote@<fn>{footnote_sample}.
+
+//footnote[footnote_sample][This is a footnote]
+
+= Chapter, Section, Subsection (headings)
+
 = 1st level (chapter)
 == 2nd level (section)
 === 3rd level (subsection)
@@ -148,17 +166,17 @@ plot sin(x)
 = Tables
 
 //table[envvars][Important environment varialbes]{
-Name            Comment
+Name						Comment
 -------------------------------------------------------------
-PATH            Directories where commands exist
-TERM            Terminal. ex: linux, kterm, vt100
-LANG            default local of users. ja_JP.eucJP and ja_JP.utf8 are popular in Japan
-LOGNAME         login name of the user
-TEMP            temporary directory. ex: /tmp
-PAGER           text viewer on man command. ex: less, more
-EDITOR          default editor. ex: vi, emacs
-MANPATH         Directories where sources of man exist
-DISPLAY         default display of X Window System
+PATH						Directories where commands exist
+TERM						Terminal. ex: linux, kterm, vt100
+LANG						default local of users. ja_JP.eucJP and ja_JP.utf8 are popular in Japan
+LOGNAME					login name of the user
+TEMP						temporary directory. ex: /tmp
+PAGER						text viewer on man command. ex: less, more
+EDITOR					default editor. ex: vi, emacs
+MANPATH					Directories where sources of man exist
+DISPLAY					default display of X Window System
 //}
 
 //table{
@@ -303,6 +321,10 @@ Re:VIEW :)
 
 @<comment>{TODO}
 
+//comment{
+TODO
+//}
+
 = Raw Data Block
 
 == //raw block
@@ -368,11 +390,23 @@ this is a special line.
 = Commands for Authors (pre-processor commands)
 
 #@#:: Comments. All texts in this line are ignored.
+
 #@warn(...):: Warning messages. The messages are showed when pre-process.
-#@require, #@provide:: Define dependency with keywords.
-#@mapfile(filename) ... #@end:: Insert all content of files.
-#@maprange(filename, range name) ... #@end:: Insert some area in content of files.
-#@mapoutput(command) ... #@end:: Execute command and insert their output.
+
+#@require Require
+#@provide Provide
+
+#@mapfile(filename)
+...
+#@end
+
+#@maprange(filename, range name)
+...
+#@end
+
+#@mapoutput(command)
+...
+#@end
 
 = Other Syntax
 
