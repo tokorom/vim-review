@@ -28,11 +28,11 @@ syn match reviewBlockCommandWithoutContent
 syn match reviewControlCommand
       \ "^//\%\(noindent\|blankline\|linebreak\|pagebreak\)\s*$"
 
-syn region reviewItemize oneline
+syn region reviewItemize oneline contains=reviewInlineCommand,reviewInlineStyleCommand
       \ matchgroup=reviewItemizePrefix start="^\s\+\*\+\s\+" end="$"
-syn region reviewOrderedItemize oneline
+syn region reviewOrderedItemize oneline contains=reviewInlineCommand,reviewInlineStyleCommand
       \ matchgroup=reviewItemizePrefix start="^\s\+[0-9]\+\.\s\+" end="$"
-syn region reviewDefinitionList oneline
+syn region reviewDefinitionList oneline contains=reviewInlineCommand,reviewInlineStyleCommand
       \ matchgroup=reviewItemizePrefix start="^\s\+\:\s\+" end="$"
 
 syn match reviewComment contains=reviewTodo

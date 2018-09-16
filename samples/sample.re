@@ -62,9 +62,9 @@ blah, blah, blah (this is paragraphs outside of the column)
 = Itemize
 
  * 1st item
- ** nested 1st item
+ ** @<b>{nested} 1st item
  * 2nd item
- ** nested 2nd item
+ ** @<b>{nested} 2nd item
  * 3rd item
 
 = Ordered Itemize
