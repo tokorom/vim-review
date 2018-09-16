@@ -20,6 +20,8 @@ Hello, footnote@<fn>{footnote_sample}.
 
 //footnote[footnote_sample][This is a footnote]
 
+@<kw>{Keyword} & @<tt>{teletype} & @<b>{bold}
+
 = Chapter, Section, Subsection (headings)
 
 = 1st level (chapter)

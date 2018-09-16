@@ -13,8 +13,12 @@ syn case match
 syn match reviewHeading
       \ "^=\+\%(\s\+\|{\|\[\).*"
 
-syn match reviewInlineCommand
-      \ "@<\w\+>{[^}]*}"
+syn region reviewInlineCommand oneline
+      \ start="@<\w\+>{" end="}"
+syn region reviewInlineStyleCommand oneline
+      \ matchgroup=reviewInlineCommand
+      \ start="@<\%\(kw\|bou\|ami\|u\|b\|i\|strong\|em\|tt\|tti\|ttb\|code\|tcy\)>{"
+      \ end="}"
 
 syn region reviewBlockCommand
       \ matchgroup=reviewBlockDeclaration start="^//\w\+\[\?.*{\s*$" end="^//}\s*$"
@@ -35,8 +39,8 @@ syn match reviewComment contains=reviewTodo
       \ "^#@.*"
 syn region reviewCommentBlock contains=reviewTodo
       \ start="^//comment\[\?.*{\s*" end="^//}\s*$"
-syn match reviewCommentInline contains=reviewTodo
-      \ "@<comment>{[^}]*}"
+syn region reviewCommentInline oneline contains=reviewTodo
+      \ start="@<comment>{" end="}"
 
 syn match reviewPreProcCommand
       \ "^#@\%\(require\|provide\)\s\+.*"
@@ -54,6 +58,7 @@ syn case match
 
 hi def link reviewHeading Conditional
 hi def link reviewInlineCommand Identifier
+hi def link reviewInlineStyleCommand Normal
 hi def link reviewBlockCommand Normal
 hi def link reviewBlockDeclaration Identifier
 hi def link reviewBlockCommandWithoutContent Identifier
