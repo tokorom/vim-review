@@ -49,6 +49,12 @@ Compiler-compiler is ...
 
 ==[/column]
 
+==[column]{label} Column with label
+
+Column with label
+
+==[/column]
+
 blah, blah, blah (this is paragraphs outside of the column)
 
 = Itemize
