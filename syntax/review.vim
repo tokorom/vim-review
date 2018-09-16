@@ -17,7 +17,8 @@ syn match reviewInlineCommand
       \ "@<\w\+>{[^}]*}"
 
 syn region reviewBlockCommand
-      \ start="^//\w\+\[\?.*{\s*$" end="^//}\s*$"
+      \ matchgroup=reviewBlockDeclaration start="^//\w\+\[\?.*{\s*$" end="^//}\s*$"
+
 syn match reviewBlockCommandWithoutContent
       \ "^//\w\+\[.*[^{]\s*$"
 syn match reviewControlCommand
@@ -53,7 +54,8 @@ syn case match
 
 hi def link reviewHeading Conditional
 hi def link reviewInlineCommand Identifier
-hi def link reviewBlockCommand Identifier
+hi def link reviewBlockCommand Normal
+hi def link reviewBlockDeclaration Identifier
 hi def link reviewBlockCommandWithoutContent Identifier
 hi def link reviewControlCommand Identifier
 hi def link reviewItemize Special
