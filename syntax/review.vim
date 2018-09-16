@@ -28,12 +28,12 @@ syn match reviewBlockCommandWithoutContent
 syn match reviewControlCommand
       \ "^//\%\(noindent\|blankline\|linebreak\|pagebreak\)\s*$"
 
-syn match reviewItemize
-      \ "^\s\+\*\+\s\+.*"
-syn match reviewOrderedItemize
-      \ "^\s\+[0-9]\+\.\s\+.*"
-syn match reviewDefinitionList
-      \ "^\s\+\:\s\+\S\+.*"
+syn region reviewItemize oneline
+      \ matchgroup=reviewItemizePrefix start="^\s\+\*\+\s\+" end="$"
+syn region reviewOrderedItemize oneline
+      \ matchgroup=reviewItemizePrefix start="^\s\+[0-9]\+\.\s\+" end="$"
+syn region reviewDefinitionList oneline
+      \ matchgroup=reviewItemizePrefix start="^\s\+\:\s\+" end="$"
 
 syn match reviewComment contains=reviewTodo
       \ "^#@.*"
@@ -63,9 +63,10 @@ hi def link reviewBlockCommand Normal
 hi def link reviewBlockDeclaration Identifier
 hi def link reviewBlockCommandWithoutContent Identifier
 hi def link reviewControlCommand Identifier
-hi def link reviewItemize Special
-hi def link reviewOrderedItemize Special
-hi def link reviewDefinitionList Special
+hi def link reviewItemizePrefix Special
+hi def link reviewItemize Normal
+hi def link reviewOrderedItemize Normal
+hi def link reviewDefinitionList Normal
 hi def link reviewComment Comment
 hi def link reviewCommentBlock Comment
 hi def link reviewCommentInline Comment
