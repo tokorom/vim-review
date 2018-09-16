@@ -34,6 +34,8 @@ syn match reviewComment
       \ "^#@.*"
 syn region reviewCommentBlock start="^//comment{" end="^//}"
       \ start="^//comment\[\?.*{\s*" end="^//}\s*$"
+syn match reviewCommentInline
+      \ "@<comment>{[^}]*}"
 
 syn match reviewPreProcCommand
       \ "^#@\%\(require\|provide\)\s\+.*"
@@ -54,6 +56,7 @@ hi def link reviewOrderedItemize Special
 hi def link reviewDefinitionList Special
 hi def link reviewComment Comment
 hi def link reviewCommentBlock Comment
+hi def link reviewCommentInline Comment
 hi def link reviewPreProcCommand PreProc
 hi def link reviewPreProcBlockCommand PreProc
 hi def link reviewWarning PreProc
