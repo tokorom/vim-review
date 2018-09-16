@@ -30,11 +30,11 @@ syn match reviewOrderedItemize
 syn match reviewDefinitionList
       \ "^\s\+\:\s\+\S\+.*"
 
-syn match reviewComment
+syn match reviewComment contains=reviewTodo
       \ "^#@.*"
-syn region reviewCommentBlock start="^//comment{" end="^//}"
+syn region reviewCommentBlock contains=reviewTodo
       \ start="^//comment\[\?.*{\s*" end="^//}\s*$"
-syn match reviewCommentInline
+syn match reviewCommentInline contains=reviewTodo
       \ "@<comment>{[^}]*}"
 
 syn match reviewPreProcCommand
@@ -44,6 +44,10 @@ syn region reviewPreProcBlockCommand
 
 syn region reviewWarning oneline
       \ matchgroup=reviewPreProcCommand start="^#@warn(" end=").*$"
+
+syn case ignore
+syn keyword reviewTodo MARK TODO FIXME contained
+syn case match
 
 " ----------
 
@@ -61,6 +65,7 @@ hi def link reviewCommentInline Comment
 hi def link reviewPreProcCommand PreProc
 hi def link reviewPreProcBlockCommand PreProc
 hi def link reviewWarning Underlined
+hi def link reviewTodo Todo
 
 " ----------
 
