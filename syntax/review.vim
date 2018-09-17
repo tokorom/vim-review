@@ -7,6 +7,7 @@ if exists("b:current_syntax")
 endif
 
 " ----------
+" syntax
 
 syn case match
 
@@ -20,13 +21,13 @@ syn region reviewInlineStyleCommand transparent oneline
       \ start="@<\%\(kw\|bou\|ami\|u\|b\|i\|strong\|em\|tt\|tti\|ttb\|code\|tcy\)>{"
       \ end="}"
 
-syn region reviewBlockCommand transparent
+syn region reviewBlockCommand transparent keepend
       \ matchgroup=reviewBlockDeclaration start="^//\w\+\[\?.*{\s*$" end="^//}\s*$"
 
 syn match reviewBlockCommandWithoutContent
       \ "^//\w\+\[.*[^{]\s*$"
 syn match reviewControlCommand
-      \ "^//\%\(noindent\|blankline\|linebreak\|pagebreak\)\s*$"
+      \ "^//\<\%\(noindent\|blankline\|linebreak\|pagebreak\)\>\s*$"
 
 syn region reviewItemize transparent oneline
       \ matchgroup=reviewItemizePrefix start="^\s\+\*\+\s\+" end="$"
@@ -37,15 +38,15 @@ syn region reviewDefinitionList transparent oneline
 
 syn match reviewComment contains=reviewTodo
       \ "^#@.*"
-syn region reviewCommentBlock contains=reviewTodo
-      \ start="^//comment\[\?.*{\s*" end="^//}\s*$"
+syn region reviewCommentBlock keepend contains=reviewTodo
+      \ start="^//\<comment\>\[\?.*{\s*" end="^//}\s*$"
 syn region reviewCommentInline oneline contains=reviewTodo
       \ start="@<comment>{" end="}"
 
 syn match reviewPreProcCommand
-      \ "^#@\%\(require\|provide\)\s\+.*"
-syn region reviewPreProcBlockCommand
-      \ start="^#@\%\(mapfile\|maprange\|mapoutput\)(.*).*" end="^#@end\s*$"
+      \ "^#@\<\%\(require\|provide\)\>\s\+.*"
+syn region reviewPreProcBlockCommand keepend
+      \ start="^#@\<\%\(mapfile\|maprange\|mapoutput\)\>(.*).*" end="^#@end\s*$"
 
 syn region reviewWarning oneline
       \ matchgroup=reviewPreProcCommand start="^#@warn(" end=").*$"
@@ -55,6 +56,30 @@ syn keyword reviewTodo MARK TODO FIXME contained
 syn case match
 
 " ----------
+" include other languages
+
+if exists('g:vim_review#include_grouplists')
+  let include_grouplists = g:vim_review#include_grouplists
+  let operations = '\<\%\(list\|listnum\|emlist\|emlistnum\)\>'
+
+  for ft in keys(include_grouplists)
+    let syntaxfile = include_grouplists[ft]
+    execute 'syn include @' . ft . ' ' . syntaxfile
+    let code_block_region = 'start="^//' . operations . '\[.*\[' . ft . '\]{\s*$"'
+          \ . ' end="^//}\s*$"'
+    let groupname = 'reviewCodeBlock_' . ft
+    execute 'syn region ' . groupname . ' keepend contains=@' . ft
+          \ . ' matchgroup=reviewBlockDeclaration'
+          \ . ' ' . code_block_region
+
+    if exists('b:current_syntax')
+      unlet b:current_syntax
+    endif
+  endfor
+endif
+
+" ----------
+" highlight
 
 hi def link reviewHeading Conditional
 hi def link reviewInlineCommand Function
